@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizzeria_challenge/model/modifier.dart';
 import 'package:pizzeria_challenge/model/product.dart';
 import 'package:get/get.dart';
 import 'package:pizzeria_challenge/utils/theme/theme.dart';
 import 'package:pizzeria_challenge/view/screen/add_product_screen.dart';
+import 'package:pizzeria_challenge/view/screen/map_screen.dart';
 import 'package:pizzeria_challenge/viewmodel/home_viewmodel.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,6 +19,12 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           title: Text('homeScreen'.tr),
+          leading: GestureDetector(
+            onTap: () {
+              Get.to(MapScreen());
+            },
+            child: Icon(Icons.map),
+          ),
           centerTitle: true,
         ),
         body: Stack(
@@ -25,18 +33,30 @@ class HomeScreen extends StatelessWidget {
                 stream:
                     FirebaseDatabase.instance.reference().child('menu').onValue,
                 builder: (context, snapshot) {
-                  DataSnapshot snapshot1 ;
+                  DataSnapshot snapshot1;
                   Map products = {};
                   if (snapshot != null) {
                     snapshot1 = snapshot?.data?.snapshot;
                     products = productFromJson(
-                        json.encode(Map.from(snapshot1?.value??{})));
+                        json.encode(Map.from(snapshot1?.value ?? {})));
                   }
                   return snapshot?.data?.snapshot?.value == null
-                      ? SizedBox()
-                      : Padding(
+                      ? Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
+                            itemBuilder: (context, index) => Container(
+                              height: 150,
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset('assets/loading.gif',fit: BoxFit.cover,),
+                              ),
+                            ),
+                          ),
+                      )
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: products.length,
                             itemBuilder: (context, index) {
@@ -47,7 +67,8 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -65,24 +86,29 @@ class HomeScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
                                                 '${p.title}',
                                                 style: AppTheme.primaryText(),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8),
                                               child: Text(
                                                 '${p.description}',
-                                                style: AppTheme.descriptionText(),
+                                                style:
+                                                    AppTheme.descriptionText(),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Column(
-                                                children: _buildList(p.modifiers),
+                                                children:
+                                                    _buildList(p.modifiers),
                                               ),
                                             )
                                           ],
@@ -94,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                               );
                             },
                           ),
-                      );
+                        );
                 }),
             Align(
               alignment: Alignment.bottomCenter,
