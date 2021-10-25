@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1005059761298",
+    "firebase_url": "https://rhino-s-pizzeria-f06e3-default-rtdb.firebaseio.com",
+    "project_id": "rhino-s-pizzeria-f06e3",
+    "storage_bucket": "rhino-s-pizzeria-f06e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005059761298:android:28251cfdc803dfbb6cb24b",
+        "android_client_info": {
+          "package_name": "com.smartmediajo.pizzeria_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005059761298-sb7vbfmleu2guq1hs3rss5rektks3u02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartmediajo.pizzeria_challenge",
+            "certificate_hash": "c5fa12a0c1009808bff113bd92e24049f3a2176b"
+          }
+        },
+        {
+          "client_id": "1005059761298-ks2c384dkrufmei4soafuhrpdq29kdu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXJXjOrhZgrnxzXt8LEbvpDz4AUiabxoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005059761298-ks2c384dkrufmei4soafuhrpdq29kdu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
